@@ -1,0 +1,11 @@
+{ 
+    "presets": ["next/babel",
+    {
+        "preset-env": {},
+        "transform-rutime": {},
+        "styled-components": {},
+        "class-properties": {}
+    }
+    ],
+    "plugins": ["@babel/plugins-proposal-do-expressions"]
+}
