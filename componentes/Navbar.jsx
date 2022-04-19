@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/Image";
 import { useState } from "react";
-import { Fa500Px, FaAccessibleIcon, FaHammer, FaHighlighter, FaGithub, FaLaravel } from "react-icons/fa";
+import { FaCog, FaCogs, FaHammer, FaHighlighter, FaGithub, FaLaravel } from "react-icons/fa";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -24,11 +24,22 @@ picture {
     display: none;
 }
 
+@media screen and (max-width: 414px) {
+    padding: 0;
+    justify-content: space-between;
+
+    picture {
+        display: flex;
+        color: white;
+        transform: translate(-35px);
+    }
+}
+
 `;
 
 const Menu =styled.ul`
 display: flex;
-width: 50vw;
+width: 20vw;
 height: 100%;
 padding: 0;
 list-style: none;
@@ -52,6 +63,18 @@ a {
     }
 }
 
+@media screen and (max-width: 414px) {
+    width: 100vw;
+    height: 150px;
+    flex-direction: column;
+    position: absolute;
+    left: ${({ open }) => (open ? "-100%" : "0%")};
+    z-index: 1000;
+    transform: translate(0, 100px);
+    background: rgba(5, 43, 41);
+
+}
+
 `;
 
 const Navbar = () => {
@@ -59,14 +82,19 @@ const Navbar = () => {
     const [show, setShow] = useState(false);
 
   return (
-    <Nav
+    <Nav 
     >
-    <motion.figure style={{ color: "white" }}
+    <motion.figure
+    animate={{ rotate: [0 ,65, 0, 65, 0] }}
+    transition={{ duration:  5  }}
+    style={{ color: "white" }}
     whileHover={{  scale: 1.5 }}
     >
         <FaHammer />
     </motion.figure>
-         <Menu as={motion.ul}
+         <Menu 
+         open={show}
+         as={motion.ul}
          >
           <li>
                   <Link href="#">
@@ -85,8 +113,8 @@ const Navbar = () => {
                   </Link>
               </li>
           </Menu>
-    <picture onClick={() => setShow(!show)} >
-        { show ? <Fa500Px /> : <FaAccessibleIcon />}
+    <picture onClick={() => setShow(!show)}>
+        {show ? <FaCog/> : <FaCogs />}
     </picture>
 </Nav>
   )
